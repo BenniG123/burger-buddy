@@ -1,7 +1,11 @@
 #include "systemc.h"
+#include "burger_buddy.h"
 #include "double_handshake.h"
 #include "double_handshake_tb.h"
-
+#include "OrderWindow.h"
+#include "Maker.h"
+#include "DeliveryWindow.h"
+#include "AdminInterface.h"
 
 int sc_main(int argc, char* argv[])
 {
