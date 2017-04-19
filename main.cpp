@@ -2,10 +2,15 @@
 #include "burger_buddy.h"
 #include "double_handshake.h"
 #include "double_handshake_tb.h"
+#include "InputWrapper.h"
 #include "OrderWindow.h"
-#include "Maker.h"
 #include "DeliveryWindow.h"
 #include "AdminInterface.h"
+#include "Maker.h"
+#include "MealCombiner.h"
+#include "IngredientOrdering.h"
+#include "SupplyTracker.h"
+#include "MoneyManager.h"
 
 int sc_main(int argc, char* argv[])
 {
