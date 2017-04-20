@@ -32,3 +32,5 @@
 # backup files
 *.swp
 *.bak
+
+*.auth
