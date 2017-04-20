@@ -21,12 +21,16 @@ int sc_main(int argc, char* argv[])
 	ps.out(dhSTR);
 	cs.in(dhSTR);
 
-	// double handshake test bench for int messaging
-	// double_handshake<int> dhINT("DH_INT");
-	// producer<int> pi("PRODUCER_INT");
-	// consumer<int> ci("CONSUMER_INT");
-	// pi.out(dhINT);
-	// ci.in(dhINT);
+	double_handshake<MoneyTransaction> fMM("a");
+	double_handshake<Meal> fST("b");
+	double_handshake<MoneyTransaction> tMM("c");
+	double_handshake<Meal> tST("d");
+
+	IngredientOrdering ingredientOrdering("e");
+	ingredientOrdering.fromMoneyManager(fMM);
+	ingredientOrdering.fromSupplyTracker(fST);
+	ingredientOrdering.toMoneyManager(tMM);
+	ingredientOrdering.toSupplyTracker(tST);
 
 	sc_start();
 
