@@ -19,11 +19,11 @@ class SupplyTracker : public sc_module {
         	// Outputs
         	sc_port< dh_write_if<bool> > toOrderWindow;
 		
-		sc_port< dh_read_if<int> > toBurgerMaker;
-                sc_port< dh_read_if<int> > toFryMaker;
-                sc_port< dh_read_if<int> > toDrinkMaker;
+		sc_port< dh_write_if<int> > toBurgerMaker;
+                sc_port< dh_write_if<int> > toFryMaker;
+                sc_port< dh_write_if<int> > toDrinkMaker;
 
-		sc_port< dh_read_if<Meal> > toIngredientOrdering;
+		sc_port< dh_write_if<Meal> > toIngredientOrdering;
 
 		
 		SC_HAS_PROCESS(SupplyTracker);
