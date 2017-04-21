@@ -4,8 +4,9 @@
 using namespace std;
 
 void OrderWindow::main() {
+		bool fromSupplyTracker; // will come from supply tracker
             Meal fromInputWrapper;
-		        MoneyTransaction fromMoneyManager;
+	    MoneyTransaction fromMoneyManager;
 
             // Outputs
             Meal toMealCombiner;
@@ -14,9 +15,18 @@ void OrderWindow::main() {
             while(1)
             { 
                       cout << "Waiting for input wrapper" << endl;
-                      
-                      if ()
-            }
+		    	fromInputWrapper -> read(fromInputWrapper);
+		    	toSupplyTracker -> write (fromInputWrapper);
+                      if (fromSupplyTracker == true)
+		      {      cout<< " Enter the amount"<<endl; 
+				toMoneyManager = // input money
+		      }
+		      else
+			     cout << " insufficient supply. Order cancelled "<< endl;
+            		toMoneyManager -> write (toMoneyManager);
+	    
+	    
+	    }
 
 
 
