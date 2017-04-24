@@ -15,7 +15,9 @@ template <class T>
 class dh_read_if : virtual public sc_interface
 {
 public:
+	sc_event data_ready;
 	virtual void read(T&) = 0;
+	virtual const sc_event& data_ready_event() const { return this->data_ready;}
 };
 
 template <class T>
@@ -23,8 +25,7 @@ class double_handshake : public sc_channel, public dh_write_if<T>, public dh_rea
 {
 public:
 	T data;
-	sc_event write_event;
-	sc_event read_ready_event;
+	sc_event read_ready_event, write_event;
 	bool valid;
 	bool ready;
 	sc_event read_done_event;
@@ -37,26 +38,34 @@ public:
 	// blocks for ACK
 	void write(T t)
 	{
+		cout << "writing started!" << endl;
 		this->data = t;
 		this->valid = true;
+
+		this->data_ready.notify();
 		
-		if(!(this->ready))
+		if(!(this->ready)) {
 				wait(read_ready_event);
+				cout << "writer blocking" << endl;
+			}
 
 		this->write_event.notify();
 		wait(read_done_event);
 		this->valid = false;
+		cout << "writing done!" << endl;
 	}
 
 	// blocking read
 	void read(T& t)
 	{
+		cout << "reading started!" << endl;
 		this->ready=true;
 		this->read_ready_event.notify();
-		wait(write_event);
+		wait(this->write_event);
 		this->ready = false;
 		t = this->data;
 		this->read_done_event.notify();
+		cout << "reading done!" << endl;
 	}
 
 	// getter for valid 

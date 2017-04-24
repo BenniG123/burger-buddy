@@ -9,6 +9,9 @@
 #define FRY_PRICE 150
 #define DRINK_PRICE 100
 
+#include <iostream>
+using namespace std;
+
 enum TransactionType {
 	WITHDRAW,
 	DEPOSIT,
@@ -25,6 +28,14 @@ struct Meal {
 	int numBurgers;
 	int numFries;
 	int numDrinks;
+
+	friend ostream& operator<<(ostream& os, const Meal& m) {
+		os << "orderNumber: " << m.orderNumber << endl
+			<< "numBurgers: " << m.numBurgers << endl
+			<< "numFries: " << m.numFries << endl
+			<< "numDrinks: " << m.numDrinks << endl;
+		return os;
+	}
 };
 
 #endif
