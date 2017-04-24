@@ -30,7 +30,7 @@ struct Meal {
 	int numDrinks;
 
 	friend ostream& operator<<(ostream& os, const Meal& m) {
-		os << "orderNumber: " << m.orderNumber << endl
+		os  << "orderNumber: " << m.orderNumber << endl
 			<< "numBurgers: " << m.numBurgers << endl
 			<< "numFries: " << m.numFries << endl
 			<< "numDrinks: " << m.numDrinks << endl;
