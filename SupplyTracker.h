@@ -16,6 +16,10 @@ class SupplyTracker : public sc_module {
 		sc_port< dh_read_if<int> > fromFryMaker;
 		sc_port< dh_read_if<int> > fromDrinkMaker;
 
+		sc_event burgerEvent;
+		sc_event drinkEvent;
+		sc_event fryEvent;
+
         	// Outputs
         	sc_port< dh_write_if<bool> > toOrderWindow;
 		
@@ -28,9 +32,13 @@ class SupplyTracker : public sc_module {
 		
 		SC_HAS_PROCESS(SupplyTracker);
 		
-		SupplyTracker(sc_module_name nm) : sc_module(nm) {SC_THREAD(main)}
+		SupplyTracker(sc_module_name nm) : sc_module(nm) {
+			SC_THREAD(processOrderRequest);
+			SC_THREAD(processMakerRequest);
+			}
 
-                void main();
+                void processOrderRequest();
+		void processMakerRequest();
 
 };
 

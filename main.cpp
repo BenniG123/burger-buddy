@@ -60,6 +60,8 @@ int sc_main(int argc, char* argv[])
 	mealComb.fromOrderWindow(OW2MC);
 	orderWind.toMealCombiner(OW2MC);
 
+	// supplyTracker.burgerEvent = fBM.write_event;
+
 	sc_start();
 
 	return 0;

@@ -4,14 +4,14 @@
 
 using namespace std;
 
-void SupplyTracker::main() {
+void SupplyTracker::processOrderRequest() {
 	
 	Meal requestedMeal;
 	Meal sentMeal;
 
 	Meal storedMeal;
 	
-	while (1) {
+	while (true) {
 		cout << "Waiting for supply request" << endl;
 
 		// Wait for OrderWindow to make a food order request
@@ -40,4 +40,23 @@ void SupplyTracker::main() {
 			}
 		}
 	}
+}
+
+void SupplyTracker::processMakerRequest() {
+ 	while (true) {
+		// Wait on multiple events
+		wait(this->fromDrinkMaker->data_ready_event() | this->fromBurgerMaker->data_ready_event() | this->fromFryMaker->data_ready_event());
+		if (this->fromDrinkMaker->checkValid()) {
+			cout << "Drink Request" << endl;
+
+		}
+		else if (this->fromBurgerMaker->checkValid()) {
+			cout << "Burger Request" << endl;
+
+		}
+		else if (this->fromFryMaker->checkValid()) {
+			cout << "Fry Request" << endl;
+
+		}
+ 	}
 }
