@@ -1,10 +1,17 @@
 #ifndef DOUBLE_HANDSHAKE_H
 #define DOUBLE_HANDSHAKE_H
 
+<<<<<<< HEAD
+#define DEBUG
+
+#ifdef DEBUG
+#define DEBUG_MSG(X) (std::cout << this->channelName  <<": " << X << std::endl)
+=======
 //#define DEBUG
 
 #ifdef DEBUG
 #define DEBUG_MSG(X) (std::cout << "DH: " << X << std::endl)
+>>>>>>> 9ad8020982f4264e2bcc301819baec74d5252807
 #else
 #define DEBUG_MSG(X)
 #endif
@@ -37,9 +44,10 @@ public:
 	T data;
 	sc_event read_ready_event, write_event;
 	bool ready;
+	string channelName;
 	sc_event read_done_event;
 
-	double_handshake(sc_module_name nm) : sc_module(nm), ready(false)
+	double_handshake(sc_module_name nm) : sc_module(nm), ready(false), channelName(nm)
 	{
 		this->valid = false;
 	}
