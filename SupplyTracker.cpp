@@ -8,8 +8,6 @@ void SupplyTracker::processOrderRequest() {
 	
 	Meal requestedMeal;
 	Meal sentMeal;
-
-	Meal storedMeal;
 	
 	while (true) {
 		cout << "Waiting for supply request" << endl;
@@ -48,15 +46,24 @@ void SupplyTracker::processMakerRequest() {
 		wait(this->fromDrinkMaker->data_ready_event() | this->fromBurgerMaker->data_ready_event() | this->fromFryMaker->data_ready_event());
 		if (this->fromDrinkMaker->checkValid()) {
 			cout << "Drink Request" << endl;
-
+			int amount;
+			this->fromDrinkMaker->read(amount);
+			storedMeal.numDrinks -= amount;
+			this->toDrinkMaker->write(amount);
 		}
 		else if (this->fromBurgerMaker->checkValid()) {
 			cout << "Burger Request" << endl;
-
+                        int amount;
+                        this->fromBurgerMaker->read(amount);
+			storedMeal.numBurgers -= amount;
+                        this->toBurgerMaker->write(amount);
 		}
 		else if (this->fromFryMaker->checkValid()) {
 			cout << "Fry Request" << endl;
-
+                        int amount;
+                        this->fromFryMaker->read(amount);
+                        storedMeal.numFries -= amount;
+                        this->toFryMaker->write(amount);
 		}
  	}
 }

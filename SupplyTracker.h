@@ -6,6 +6,8 @@
 #include "double_handshake.h"
 
 class SupplyTracker : public sc_module {
+	private:
+		Meal storedMeal;
 
 	public:
         	// Inputs
