@@ -10,7 +10,7 @@ class OrderWindow : public sc_module {
 	public:
         	// Inputs
         	sc_port< dh_read_if<Meal> > fromInputWrapper;
-		sc_port< dh_read_if<int> > fromMealCombiner;
+	//	sc_port< dh_read_if<int> > fromMealCombiner;
 
 		sc_port< dh_read_if<MoneyTransaction> > fromMoneyManager;
 		sc_port< dh_read_if<bool> > fromSupplyTracker;
