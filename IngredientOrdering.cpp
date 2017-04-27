@@ -11,7 +11,7 @@ void IngredientOrdering::main() {
 	MoneyTransaction requestedMoney;
 	MoneyTransaction sentMoney;
 	
-	while (1) {
+	while (true) {
 		cout << "Waiting for ingredient order request" << endl;
 
 		// Wait for Supply Tracker to make a food order request

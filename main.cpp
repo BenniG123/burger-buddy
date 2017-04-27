@@ -53,6 +53,8 @@ int sc_main(int argc, char* argv[])
 	supplyTracker.fromFryMaker(fFM);
 	supplyTracker.toFryMaker(tFM);
 
+	supplyTracker.burgerEvent = fBM.write_event;
+
 	sc_start();
 
 	return 0;

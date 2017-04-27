@@ -11,7 +11,7 @@ void SupplyTracker::main() {
 
 	Meal storedMeal;
 	
-	while (1) {
+	while (true) {
 		cout << "Waiting for supply request" << endl;
 
 		// Wait for OrderWindow to make a food order request
@@ -40,4 +40,19 @@ void SupplyTracker::main() {
 			}
 		}
 	}
+}
+
+void SupplyTracker::burgerRequest() {
+// 	while (true) {
+		// Wait on multiple events?
+		cout << "Burger Request" << endl;
+// 	}
+}
+
+void SupplyTracker::drinkRequest() {
+	cout << "Drink Request" << endl;
+}
+
+void SupplyTracker::fryRequest() {
+	cout << "Fry Request" << endl;
 }
