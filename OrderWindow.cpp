@@ -17,21 +17,19 @@ void OrderWindow::main()
 			cout<<"checking with supply tracker"<<endl;
 			toSupplyTracker -> write(requestedMeal);
 			fromSupplyTracker -> read(b);
-				if (b == false)
+			if (b == false) {
 				cout<<"cancel the order as not enough supplies"<<endl;
-				else 
+				continue;
+			}
+			else {
 				cout<<"enter the amount"<<endl;
-			cin>>inputMoney.amt;
-			while (1)
-			{	if (inputMoney.amt < requestedMeal.getPrice())
-				{
-					cout <<"Insufficient money entered. "<<endl;
-					cout <<"Enter equal or more than "<<requestedMeal.getPrice()-inputMoney.amt<<"amount"<<endl;
-				}
-				else
-				{
-					break;
-				}
+			}
+			cin >> inputMoney.amt;
+			while (inputMoney.amt < requestedMeal.getPrice())
+			{
+					cout << "Insufficient money entered. "<<endl;
+					cout << "Enter equal or more than "<< requestedMeal.getPrice() << " amount" << endl;
+					cin >> inputMoney.amt;
 			}
 			inputMoney.type = DEPOSIT;
 			toMoneyManager -> write (inputMoney);
