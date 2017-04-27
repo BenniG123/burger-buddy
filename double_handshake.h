@@ -16,9 +16,10 @@ class dh_read_if : virtual public sc_interface
 {
 public:
 	sc_event data_ready;
+	bool valid;
 	virtual void read(T&) = 0;
 	virtual const sc_event& data_ready_event() const { return this->data_ready;}
-	virtual bool checkValid();
+	virtual const bool checkValid() const { return this->valid; };
 };
 
 template <class T>
@@ -27,13 +28,12 @@ class double_handshake : public sc_channel, public dh_write_if<T>, public dh_rea
 public:
 	T data;
 	sc_event read_ready_event, write_event;
-	bool valid;
 	bool ready;
 	sc_event read_done_event;
 
-	double_handshake(sc_module_name nm) : sc_module(nm), valid(false), ready(false)
+	double_handshake(sc_module_name nm) : sc_module(nm), ready(false)
 	{
-
+		this->valid = false;
 	}
 
 	// blocks for ACK
@@ -67,12 +67,6 @@ public:
 		t = this->data;
 		this->read_done_event.notify();
 		cout << "reading done!" << endl;
-	}
-
-	// getter for valid 
-	bool checkValid()
-	{
-		return this->valid;
 	}
 
 };
