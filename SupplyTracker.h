@@ -33,19 +33,12 @@ class SupplyTracker : public sc_module {
 		SC_HAS_PROCESS(SupplyTracker);
 		
 		SupplyTracker(sc_module_name nm) : sc_module(nm) {
-			SC_THREAD(main);
-			SC_THREAD(burgerRequest);
-			sensitive(burgerEvent);
-                        SC_THREAD(drinkRequest);
-                        sensitive(drinkEvent);
-                        SC_THREAD(fryRequest);
-                        sensitive(fryEvent);
+			SC_THREAD(processOrderRequest);
+			SC_THREAD(processMakerRequest);
 			}
 
-                void main();
-		void burgerRequest();
-		void drinkRequest();
-		void fryRequest();
+                void processOrderRequest();
+		void processMakerRequest();
 
 };
 
