@@ -44,11 +44,6 @@ int sc_main(int argc, char* argv[])
     double_handshake<Meal> IO2ST("IO2ST");
     double_handshake<MoneyTransaction> IO2MM("IO2MM");
     
-    // Input Wrapper
-    InputWrapper inputWrapper("IW");
-    inputWrapper.toAdminInterface(IW2AI);
-    inputWrapper.toOrderWindow(IW2OW);
-    
     // Order Window
     OrderWindow orderWindow("OW");
     orderWindow.fromInputWrapper(IW2OW);
@@ -126,6 +121,11 @@ int sc_main(int argc, char* argv[])
     // Delivery Window
     DeliveryWindow deliveryWindow("DW");
     deliveryWindow.fromMealCombiner(MC2DW);
+    
+    // Input Wrapper
+    InputWrapper inputWrapper("IW");
+    inputWrapper.toAdminInterface(IW2AI);
+    inputWrapper.toOrderWindow(IW2OW);
 
     sc_start();
 
