@@ -18,6 +18,7 @@ public:
 	sc_event data_ready;
 	virtual void read(T&) = 0;
 	virtual const sc_event& data_ready_event() const { return this->data_ready;}
+	virtual bool checkValid();
 };
 
 template <class T>

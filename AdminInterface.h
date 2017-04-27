@@ -8,19 +8,18 @@
 class AdminInterface : public sc_module {
 
 	public:
-        	// Inputs
+		// Inputs
 		sc_port< dh_read_if<MoneyTransaction> > fromInputWrapper;
-        	sc_port< dh_read_if<MoneyTransaction> > fromMoneyManager;
+		sc_port< dh_read_if<MoneyTransaction> > fromMoneyManager;
 
-        	// Outputs
-        	sc_port< dh_write_if<MoneyTransaction> > toMoneyManager;
+		// Outputs
+		sc_port< dh_write_if<MoneyTransaction> > toMoneyManager;
 
-                void main();
+		void runAdmin();
 		
 		SC_HAS_PROCESS(AdminInterface);
 		
-		AdminInterface(sc_module_name nm) : sc_module(nm) {SC_THREAD(main)}
-
+		AdminInterface(sc_module_name nm) : sc_module(nm) {SC_THREAD(runAdmin)}
 
 };
 
