@@ -22,6 +22,17 @@ void OrderWindow::main()
 				else 
 				cout<<"enter the amount"<<endl;
 			cin>>inputMoney.amt;
+			while (1)
+			{	if (inputMoney.amt < requestedMeal.getPrice())
+				{
+					cout <<"Insufficient money entered. "<<endl;
+					cout <<"Enter equal or more than "<<requestedMeal.getPrice()-inputMoney.amt<<"amount"<<endl;
+				}
+				else
+				{
+					break;
+				}
+			}
 			inputMoney.type = DEPOSIT;
 			toMoneyManager -> write (inputMoney);
 			changeMoney.amt = requestedMeal.getPrice();
