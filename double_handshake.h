@@ -1,6 +1,14 @@
 #ifndef DOUBLE_HANDSHAKE_H
 #define DOUBLE_HANDSHAKE_H
 
+//#define DEBUG
+
+#ifdef DEBUG
+#define DEBUG_MSG(X) (std::cout << "DH: " << X << std::endl)
+#else
+#define DEBUG_MSG(X)
+#endif
+
 #include <systemc.h>
 using namespace sc_core;
 
@@ -39,7 +47,7 @@ public:
 	// blocks for ACK
 	void write(T t)
 	{
-		cout << "writing started!" << endl;
+		DEBUG_MSG("writing started!");
 		this->data = t;
 		this->valid = true;
 
@@ -47,26 +55,26 @@ public:
 		
 		if(!(this->ready)) {
 				wait(read_ready_event);
-				cout << "writer blocking" << endl;
+				DEBUG_MSG("writer blocking");
 			}
 
 		this->write_event.notify();
 		wait(read_done_event);
 		this->valid = false;
-		cout << "writing done!" << endl;
+		DEBUG_MSG("writing done!");
 	}
 
 	// blocking read
 	void read(T& t)
 	{
-		cout << "reading started!" << endl;
+		DEBUG_MSG("reading started!");
 		this->ready=true;
 		this->read_ready_event.notify();
 		wait(this->write_event);
 		this->ready = false;
 		t = this->data;
 		this->read_done_event.notify();
-		cout << "reading done!" << endl;
+		DEBUG_MSG("reading done!");
 	}
 
 };
