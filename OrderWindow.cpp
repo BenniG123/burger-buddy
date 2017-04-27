@@ -7,7 +7,7 @@ using namespace std;
 	
 void OrderWindow::main()
 {		Meal requestedMeal;
-  MoneyTransaction inputMoney,outputMoney;
+		MoneyTransaction inputMoney,changeMoney,outputMoney;
 		bool b;
 		
 		while(1)
@@ -24,9 +24,12 @@ void OrderWindow::main()
 			cin>>inputMoney.amt;
 			inputMoney.type = DEPOSIT;
 			toMoneyManager -> write (inputMoney);
+			changeMoney.amt = requestedMeal.getPrice();
+			changeMoney.type = WITHDRAW;
+			toMoneyManager -> write (changeMoney);
 			fromMoneyManager -> read (outputMoney);
 			if (outputMoney.amt != 0 && outputMoney.type == WITHDRAW)
-			cout<<"the remaining balance returned is"<<outputMoney.amt<<endl;
+				cout<<"the remaining balance returned is"<<outputMoney.amt<<endl;
 			
 			cout <<"sending request to meal combiner"<<"with order number"<<requestedMeal.orderNumber<<endl;
 			toMealCombiner -> write(requestedMeal);

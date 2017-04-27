@@ -36,6 +36,10 @@ struct Meal {
 			<< "numDrinks: " << m.numDrinks << endl;
 		return os;
 	}
+
+	int getPrice() {
+		return numBurgers * BURGER_PRICE + numFries * FRY_PRICE + numDrinks * DRINK_PRICE;
+	}
 };
 
 #endif

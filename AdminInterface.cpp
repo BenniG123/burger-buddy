@@ -16,7 +16,7 @@ void AdminInterface::runAdmin() {
 
 		// Step 3a, no response needed if deposit
 		if (t1.type == DEPOSIT) {
-			cout << "Successfully deposited $" << setprecision(2) << t1.amt << endl;
+			cout << "Successfully deposited $" << setprecision(2) << t1.amt / 100.0 << endl;
 		}
 		// Step 3b, get the response from the Money Manager
 		else {
@@ -25,17 +25,17 @@ void AdminInterface::runAdmin() {
 				case WITHDRAW:
 					if (t2.amt < 0) {
 						// Insufficient funds
-						cout << "Insufficient funds: Money Manager only has $" << t1.amt + t2.amt << endl;
+						cout << "Insufficient funds: Money Manager only has $" << setprecision(2) << (t1.amt + t2.amt) / 100.0 << endl;
 					}
 					else {
-						cout << "Successfully withdrew $" << setprecision(2) << t2.amt << endl;
+						cout << "Successfully withdrew $" << setprecision(2) << t2.amt / 100.0 << endl;
 					}
 					break;
 				case DEPOSIT:
 					// Do nothing
 					break;
 				case CHECK:
-					cout << "Current balance is $" << setprecision(2) << t2.amt << endl;
+					cout << "Current balance is $" << setprecision(2) << t2.amt / 100.0 << endl;
 					break;
 			}
 		}

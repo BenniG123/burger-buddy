@@ -70,12 +70,32 @@ void MoneyManager::processTransaction() {
 		}
 		else if (this->fromOrderWindow->checkValid()) {
 			cout << "Order Window is submitting payment" << endl;
-			MoneyTransaction t;
+			MoneyTransaction t1, t2;
 
-			// Step 1, read submitted money
-			this->fromOrderWindow->read(t);
+			// Step 1, read request
+			this->fromOrderWindow->read(t1);
 
-			// Need to change spec, we currently have no way of determining change
+			// Step 2, process deposit
+			if (t1.type == DEPOSIT) {
+				this->money += t1.amt;
+				
+				// Step 3, read withdrawl request
+				this->fromIngredientOrdering->read(t2);
+
+				// Step 4, send change back
+				if (t2.amt < t1.amt) {
+					// Good to go
+					this->money -= t2.amt;
+					this->toIngredientOrdering->write(t2);
+				}
+				else {
+					// Bad
+					cout << "Error: Cannot request more change than money submitted" << endl;
+				}
+			}
+			else {
+				cout << "Error: Order Window must submit money before withdrawing change" << endl;
+			}
 		}
 	}
 }
