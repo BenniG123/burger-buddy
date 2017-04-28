@@ -6,7 +6,7 @@ void MoneyManager::processTransaction() {
 		// Step 1 wait for an order to come in from the Order Window
 		wait(this->fromAdminInterface->data_ready_event() | this->fromIngredientOrdering->data_ready_event() | this->fromOrderWindow->data_ready_event());
 		if (this->fromAdminInterface->checkValid()) {
-			cout << "Admin Interface is making a request" << endl;
+			DEBUG_MSG("Admin Interface is making a request");
 			MoneyTransaction t;
 
 			// Step 1, read the request
@@ -42,7 +42,7 @@ void MoneyManager::processTransaction() {
 
 		}
 		else if (this->fromIngredientOrdering->checkValid()) {
-			cout << "Ingredient Ordering is making a request" << endl;
+			DEBUG_MSG("Ingredient Ordering is making a request");
 			MoneyTransaction t;
 
 			// Step 1, read the request
@@ -69,7 +69,7 @@ void MoneyManager::processTransaction() {
 			}
 		}
 		else if (this->fromOrderWindow->checkValid()) {
-			cout << "Order Window is submitting payment" << endl;
+			DEBUG_MSG("Order Window is submitting payment");
 			MoneyTransaction t1, t2;
 
 			// Step 1, read request

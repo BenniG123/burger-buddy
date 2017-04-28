@@ -12,18 +12,17 @@ void OrderWindow::main()
 		
 		while(1)
 		{
-			cout<<"wait for input wrapper meal plan"<<endl;
+			DEBUG_MSG("wait for input wrapper meal plan");
 			fromInputWrapper-> read(requestedMeal);
-			cout<<"checking with supply tracker"<<endl;
+			DEBUG_MSG("checking with supply tracker");
 			toSupplyTracker -> write(requestedMeal);
 			fromSupplyTracker -> read(b);
 			if (b == false) {
 				cout<<"cancel the order as not enough supplies"<<endl;
 				continue;
 			}
-			else {
-				cout<<"enter the amount"<<endl;
-			}
+
+			cout<<"enter the payment amount"<<endl;
 			cin >> inputMoney.amt;
 			while (inputMoney.amt < requestedMeal.getPrice())
 			{
@@ -40,7 +39,7 @@ void OrderWindow::main()
 			if (outputMoney.amt != 0 && outputMoney.type == WITHDRAW)
 				cout<<"the remaining balance returned is"<<outputMoney.amt<<endl;
 			
-			cout <<"sending request to meal combiner"<<"with order number"<<requestedMeal.orderNumber<<endl;
+			DEBUG_MSG("sending request to meal combiner"<<"with order number"<<requestedMeal.orderNumber);
 			toMealCombiner -> write(requestedMeal);
 		}
 }

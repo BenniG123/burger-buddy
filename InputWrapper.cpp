@@ -13,7 +13,7 @@ void InputWrapper:: main()
 		while (1)
 		{	static int Number=0;
 			money.amt=0;
-			cout <<"press 1 for order window or 2 for admin"<<endl;
+			cout <<"Press 1 for order window or 2 for admin interface"<<endl;
 			cin >> i;
 			if  (i ==1) 
 			{
@@ -29,12 +29,12 @@ void InputWrapper:: main()
 				requestedMeal.numFries = y;
 				requestedMeal.numDrinks = z;
 				toOrderWindow -> write (requestedMeal);
-				cout <<"sent order"<<endl;
+				DEBUG_MSG("sent order");
 			}
 			else 
 				{	
 					cout <<"welcome to admin interface. "<<endl;
-					cout <<" deposit press 1,  withdraw press 2, checking press 3"<<endl;
+					cout <<" deposit press 1, withdraw press 2, checking press 3"<<endl;
 					cin >> i;
 					if (i  == 1 )
 					{	cout<<"enter the amount to be deposited"<<endl;
@@ -42,7 +42,7 @@ void InputWrapper:: main()
 						money.type = DEPOSIT;
 						money.amt = m;
 						toAdminInterface -> write(money);	
-						cout<<"request sent"<<endl;		
+						DEBUG_MSG("DEPOSIT request sent");		
 					}
 					else if (i ==2)
 					{	cout<<"enter the amount to be withdrawn"<<endl;
@@ -50,13 +50,13 @@ void InputWrapper:: main()
 						money.type = WITHDRAW;
 						money.amt = m;
 						toAdminInterface -> write(money);	
-						cout<<"request sent"<<endl;
+						DEBUG_MSG("WITHDRAW request sent");
 					}
 					else
 					{	money.type = CHECK;
 						money.amt=0;
 						toAdminInterface -> write(money);	
-						cout<<"request sent"<<endl;
+						DEBUG_MSG("CHECK request sent");
 					}
 		
 				}

@@ -12,7 +12,7 @@ void IngredientOrdering::main() {
 	MoneyTransaction sentMoney;
 	
 	while (true) {
-		cout << "Waiting for ingredient order request" << endl;
+		DEBUG_MSG("Waiting for ingredient order request");
 
 		// Wait for Supply Tracker to make a food order request
 		fromSupplyTracker->read(requestedMeal);
@@ -23,12 +23,12 @@ void IngredientOrdering::main() {
 		requestedMoney.amt += requestedMeal.numDrinks * DRINK_COST;
 		requestedMoney.type = WITHDRAW;
 
-		cout << "Requested meal: " << requestedMeal.numBurgers <<
+		DEBUG_MSG("Requested meal: " << requestedMeal.numBurgers <<
 			" Burgers, " << requestedMeal.numFries <<
 			" Fries, " << requestedMeal.numDrinks <<
-			"Drinks" << endl;
+			" Drinks");
 
-		cout << "Total cost: " << requestedMoney.amt << endl;
+		DEBUG_MSG("Total cost: " << requestedMoney.amt << endl);
 
 		// Try to withdraw that much from the money manager to spend
 		// on the order

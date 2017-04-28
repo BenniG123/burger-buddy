@@ -6,7 +6,7 @@ void MealCombiner::processMeals() {
 
 		// Step 1 wait for an order to come in from the Order Window
 		wait(this->fromOrderWindow->data_ready_event());
-		cout << "MealCombiner tried to read OrderWindow!" << endl;
+		DEBUG_MSG("MealCombiner tried to read OrderWindow!");
 		Meal m;
 		this->fromOrderWindow->read(m);
 		

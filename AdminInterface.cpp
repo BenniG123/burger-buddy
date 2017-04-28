@@ -7,7 +7,7 @@ void AdminInterface::runAdmin() {
 
 		// Step 1 wait for the user to access the interface
 		wait(this->fromInputWrapper->data_ready_event());
-		cout << "Input Wrapper has accessed the Admin Interface" << endl;
+		DEBUG_MSG("Input Wrapper has accessed the Admin Interface");
 		MoneyTransaction t1, t2;
 		this->fromInputWrapper->read(t1);
 		

@@ -2,8 +2,9 @@
 #define SUPPLY_TRACKER_H
 
 #include "systemc.h"
-#include "burger_buddy.h"
 #include "double_handshake.h"
+
+#include "burger_buddy.h"
 
 class SupplyTracker : public sc_module {
 	private:
@@ -37,7 +38,7 @@ class SupplyTracker : public sc_module {
 		SupplyTracker(sc_module_name nm) : sc_module(nm) {
 			SC_THREAD(processOrderRequest);
 			SC_THREAD(processMakerRequest);
-			}
+		}
 
                 void processOrderRequest();
 		void processMakerRequest();

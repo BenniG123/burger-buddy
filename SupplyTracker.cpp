@@ -10,7 +10,7 @@ void SupplyTracker::processOrderRequest() {
 	Meal sentMeal;
 	
 	while (true) {
-		cout << "Waiting for supply request" << endl;
+		DEBUG_MSG("Waiting for supply request");
 
 		// Wait for OrderWindow to make a food order request
 		fromOrderWindow->read(requestedMeal);
@@ -45,25 +45,25 @@ void SupplyTracker::processMakerRequest() {
 		// Wait on multiple events
 		wait(this->fromDrinkMaker->data_ready_event() | this->fromBurgerMaker->data_ready_event() | this->fromFryMaker->data_ready_event());
 		if (this->fromDrinkMaker->checkValid()) {
-			cout << "Drink Request" << endl;
+			DEBUG_MSG("Drink Request");
 			int amount;
 			this->fromDrinkMaker->read(amount);
 			storedMeal.numDrinks -= amount;
 			this->toDrinkMaker->write(amount);
 		}
 		else if (this->fromBurgerMaker->checkValid()) {
-			cout << "Burger Request" << endl;
-                        int amount;
-                        this->fromBurgerMaker->read(amount);
+			DEBUG_MSG("Burger Request");
+            int amount;
+            this->fromBurgerMaker->read(amount);
 			storedMeal.numBurgers -= amount;
-                        this->toBurgerMaker->write(amount);
+            this->toBurgerMaker->write(amount);
 		}
 		else if (this->fromFryMaker->checkValid()) {
-			cout << "Fry Request" << endl;
-                        int amount;
-                        this->fromFryMaker->read(amount);
-                        storedMeal.numFries -= amount;
-                        this->toFryMaker->write(amount);
+			DEBUG_MSG("Fry Request");
+            int amount;
+            this->fromFryMaker->read(amount);
+            storedMeal.numFries -= amount;
+            this->toFryMaker->write(amount);
 		}
  	}
 }

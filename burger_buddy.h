@@ -9,6 +9,25 @@
 #define FRY_PRICE 150
 #define DRINK_PRICE 100
 
+// turn off general debug messages by commenting out the line below 
+#define DEBUG
+
+// turn off channel (double_handshake) debug messages by commenting out the line below
+#define DEBUG_CHANNELS
+
+#ifdef DEBUG
+#define DEBUG_MSG(X) (std::cout << this->name()  <<": " << X << std::endl)
+#else
+#define DEBUG_MSG(X)
+#endif
+
+#ifdef DEBUG_CHANNELS
+#define DEBUG_MSG_CHANNEL(X) (std::cout << this->name()  <<": " << X << std::endl)
+#else 
+#define DEBUG_MSG_CHANNEL(X)
+#endif
+
+
 #include <iostream>
 using namespace std;
 

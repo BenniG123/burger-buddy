@@ -1,14 +1,7 @@
 #ifndef DOUBLE_HANDSHAKE_H
 #define DOUBLE_HANDSHAKE_H
 
-#define DEBUG
-
-#ifdef DEBUG
-#define DEBUG_MSG(X) (std::cout << this->channelName  <<": " << X << std::endl)
-#else
-#define DEBUG_MSG(X)
-#endif
-
+#include "burger_buddy.h"
 #include <systemc.h>
 using namespace sc_core;
 
@@ -48,7 +41,7 @@ public:
 	// blocks for ACK
 	void write(T t)
 	{
-		DEBUG_MSG("writing started!");
+		DEBUG_MSG_CHANNEL("writing started!");
 		this->data = t;
 		this->valid = true;
 
@@ -56,26 +49,26 @@ public:
 		
 		if(!(this->ready)) {
 				wait(read_ready_event);
-				DEBUG_MSG("writer blocking");
+				DEBUG_MSG_CHANNEL("writer blocking");
 			}
 
 		this->write_event.notify();
 		wait(read_done_event);
 		this->valid = false;
-		DEBUG_MSG("writing done!");
+		DEBUG_MSG_CHANNEL("writing done!");
 	}
 
 	// blocking read
 	void read(T& t)
 	{
-		DEBUG_MSG("reading started!");
+		DEBUG_MSG_CHANNEL("reading started!");
 		this->ready=true;
 		this->read_ready_event.notify();
 		wait(this->write_event);
 		this->ready = false;
 		t = this->data;
 		this->read_done_event.notify();
-		DEBUG_MSG("reading done!");
+		DEBUG_MSG_CHANNEL("reading done!");
 	}
 
 };
