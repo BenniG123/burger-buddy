@@ -12,6 +12,10 @@ Steps:
 */
 
 void Maker::processCombinerRequest() {
+
+	DEBUG_MSG("Spawned");
+
+
 	while(true) {
 
 		// Step 1 Wait for Meal Combiner to issue an order

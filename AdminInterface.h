@@ -15,6 +15,8 @@ class AdminInterface : public sc_module {
 		// Outputs
 		sc_port< dh_write_if<MoneyTransaction> > toMoneyManager;
 
+		sc_port< dh_write_if<bool> > toInputWrapper;
+
 		void runAdmin();
 		
 		SC_HAS_PROCESS(AdminInterface);

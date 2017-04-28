@@ -6,10 +6,11 @@ void AdminInterface::runAdmin() {
 	while(true) {
 
 		// Step 1 wait for the user to access the interface
-		wait(this->fromInputWrapper->data_ready_event());
-		DEBUG_MSG("Input Wrapper has accessed the Admin Interface");
+		//wait(this->fromInputWrapper->data_ready_event());
+		//DEBUG_MSG("Input Wrapper has accessed the Admin Interface");
 		MoneyTransaction t1, t2;
 		this->fromInputWrapper->read(t1);
+		DEBUG_MSG("Input Wrapper has accessed the Admin Interface");
 		
 		// Step 2 forward the request to the money manager
 		this->toMoneyManager->write(t1);
@@ -39,5 +40,6 @@ void AdminInterface::runAdmin() {
 					break;
 			}
 		}
+		this->toInputWrapper->write(true);
 	}
 }

@@ -9,6 +9,8 @@ void OrderWindow::main()
 {		Meal requestedMeal;
 		MoneyTransaction inputMoney,changeMoney,outputMoney;
 		bool b;
+
+		DEBUG_MSG("Spawned");
 		
 		while(1)
 		{

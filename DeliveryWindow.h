@@ -13,6 +13,8 @@ class DeliveryWindow : public sc_module {
     	// Inputs
     	sc_port< dh_read_if<Meal> > fromMealCombiner;
 
+        sc_port< dh_write_if<bool> > toInputWrapper;
+
     	// Outputs
     	// none
 
@@ -22,6 +24,7 @@ class DeliveryWindow : public sc_module {
         		Meal deliveredMeal;
         		this->fromMealCombiner->read(deliveredMeal);
         		cout << "Order Up!: " << endl << deliveredMeal;
+                this->toInputWrapper->write(true);
         	}
         }
 		

@@ -2,6 +2,8 @@
 
 void MealCombiner::processMeals() { 
 
+	DEBUG_MSG("Spawned");
+
 	while(true) {
 
 		// Step 1 wait for an order to come in from the Order Window

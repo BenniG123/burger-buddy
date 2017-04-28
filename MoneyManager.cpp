@@ -2,6 +2,8 @@
 
 void MoneyManager::processTransaction() { 
 
+	DEBUG_MSG("Spawned");
+
 	while(true) {
 		// Step 1 wait for an order to come in from the Order Window
 		wait(this->fromAdminInterface->data_ready_event() | this->fromIngredientOrdering->data_ready_event() | this->fromOrderWindow->data_ready_event());
@@ -31,6 +33,7 @@ void MoneyManager::processTransaction() {
 					break;
 				case DEPOSIT:
 					// Do nothing
+					this->money = t.amt;
 					break;
 				case CHECK:
 					t.amt = this->money;

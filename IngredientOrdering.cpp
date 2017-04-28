@@ -11,6 +11,8 @@ void IngredientOrdering::main() {
 	MoneyTransaction requestedMoney;
 	MoneyTransaction sentMoney;
 	
+	DEBUG_MSG("Spawned");
+
 	while (true) {
 		DEBUG_MSG("Waiting for ingredient order request");
 

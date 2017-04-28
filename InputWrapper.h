@@ -11,6 +11,9 @@ class InputWrapper : public sc_module {
         	// Outputs
         	sc_port< dh_write_if<Meal> > toOrderWindow;
 		sc_port< dh_write_if<MoneyTransaction> > toAdminInterface;
+
+        sc_port< dh_read_if<bool> > fromAdminInterface;
+        sc_port< dh_read_if<bool> > fromDeliveryWindow;
 		
 		SC_HAS_PROCESS(InputWrapper);
 

@@ -8,6 +8,9 @@ void SupplyTracker::processOrderRequest() {
 	
 	Meal requestedMeal;
 	Meal sentMeal;
+
+	DEBUG_MSG("Spawned processOrderRequest()");
+
 	
 	while (true) {
 		DEBUG_MSG("Waiting for supply request");
@@ -41,6 +44,9 @@ void SupplyTracker::processOrderRequest() {
 }
 
 void SupplyTracker::processMakerRequest() {
+
+	DEBUG_MSG("Spawned processMakerRequest()");
+
  	while (true) {
 		// Wait on multiple events
 		wait(this->fromDrinkMaker->data_ready_event() | this->fromBurgerMaker->data_ready_event() | this->fromFryMaker->data_ready_event());
