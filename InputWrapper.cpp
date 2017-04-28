@@ -6,6 +6,19 @@
 
 using namespace std;
 
+
+void retrieveIntegerInput(int &n)
+{
+	cin >> n;
+	while(cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "Invalid number. Please try again: " << endl;
+		cin >> n;
+	}
+}
+
 void InputWrapper:: main()
 {	int i, x, y,z, m;
 	Meal requestedMeal; 
@@ -14,15 +27,15 @@ void InputWrapper:: main()
 		{	static int Number=0;
 			money.amt=0;
 			cout <<"Press 1 for order window or 2 for admin interface"<<endl;
-			cin >> i;
-			if  (i ==1) 
+			retrieveIntegerInput(i);
+			if  (i == 1) 
 			{
 				cout <<"Welcome to order window. Enter the number of burgers"<<endl;
-				cin>>x;
-				cout <<" Enter the number of fries"<<endl;
-				cin>>y;
+				retrieveIntegerInput(x);
+				cout <<"Enter the number of fries"<<endl;
+				retrieveIntegerInput(y);
 				cout <<"Enter the number of drinks"<<endl;
-				cin>>z;
+				retrieveIntegerInput(z);
 				Number = Number+1;
 				requestedMeal.orderNumber = Number;
 				requestedMeal.numBurgers = x;
@@ -35,10 +48,10 @@ void InputWrapper:: main()
 				{	
 					cout <<"welcome to admin interface. "<<endl;
 					cout <<" deposit press 1, withdraw press 2, checking press 3"<<endl;
-					cin >> i;
+					retrieveIntegerInput(i);
 					if (i  == 1 )
 					{	cout<<"enter the amount to be deposited"<<endl;
-						cin >> m;
+						retrieveIntegerInput(m);
 						money.type = DEPOSIT;
 						money.amt = m;
 						toAdminInterface -> write(money);	
@@ -46,7 +59,7 @@ void InputWrapper:: main()
 					}
 					else if (i ==2)
 					{	cout<<"enter the amount to be withdrawn"<<endl;
-						cin >> m;
+						retrieveIntegerInput(m);
 						money.type = WITHDRAW;
 						money.amt = m;
 						toAdminInterface -> write(money);	
@@ -62,4 +75,5 @@ void InputWrapper:: main()
 				}
 		}
 }
+
 
