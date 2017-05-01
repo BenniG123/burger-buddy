@@ -47,8 +47,11 @@ void InputWrapper:: main()
 			DEBUG_MSG("sent order to order window");
 			toOrderWindow -> write (requestedMeal);
 
-			//bool dontMatter; // :p
-			//this->fromDeliveryWindow->read(dontMatter);
+			// Confirm that we're handing control back to the Input Wrapper
+			bool dontMatter;
+			this->fromDeliveryWindow->read(dontMatter);
+
+			DEBUG_MSG("here");
 		}
 		else 
 			{	
@@ -61,7 +64,7 @@ void InputWrapper:: main()
 					money.type = DEPOSIT;
 					money.amt = m;
 					DEBUG_MSG("DEPOSIT request sent");
-					toAdminInterface -> write(money);			
+					toAdminInterface -> write(money);
 				}
 				else if (i ==2)
 				{	cout<<"enter the amount to be withdrawn"<<endl;
@@ -78,7 +81,8 @@ void InputWrapper:: main()
 					toAdminInterface -> write(money);	
 				}
 
-				bool dontMatter; // :p
+				// Confirm that we're handing control back to the Input Wrapper
+				bool dontMatter;
 				this->fromAdminInterface->read(dontMatter);
 	
 			}

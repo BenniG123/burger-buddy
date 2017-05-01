@@ -3,6 +3,7 @@
 void MoneyManager::processTransaction() { 
 
 	DEBUG_MSG("Spawned");
+	money = 50000;
 
 	while(true) {
 		// Step 1 wait for an order to come in from the Order Window
@@ -33,7 +34,7 @@ void MoneyManager::processTransaction() {
 					break;
 				case DEPOSIT:
 					// Do nothing
-					this->money = t.amt;
+					this->money += t.amt;
 					break;
 				case CHECK:
 					t.amt = this->money;
@@ -44,7 +45,7 @@ void MoneyManager::processTransaction() {
 			}
 
 		}
-		else if (this->fromIngredientOrdering->checkValid()) {
+		if (this->fromIngredientOrdering->checkValid()) {
 			DEBUG_MSG("Ingredient Ordering is making a request");
 			MoneyTransaction t;
 
@@ -71,7 +72,7 @@ void MoneyManager::processTransaction() {
 				cout << "Error: Ingredient Ordering can only withdraw money" << endl;
 			}
 		}
-		else if (this->fromOrderWindow->checkValid()) {
+		if (this->fromOrderWindow->checkValid()) {
 			DEBUG_MSG("Order Window is submitting payment");
 			MoneyTransaction t1, t2;
 
@@ -83,13 +84,13 @@ void MoneyManager::processTransaction() {
 				this->money += t1.amt;
 				
 				// Step 3, read withdrawl request
-				this->fromIngredientOrdering->read(t2);
+				this->fromOrderWindow->read(t2);
 
 				// Step 4, send change back
 				if (t2.amt < t1.amt) {
 					// Good to go
 					this->money -= t2.amt;
-					this->toIngredientOrdering->write(t2);
+					this->toOrderWindow->write(t2);
 				}
 				else {
 					// Bad
@@ -101,4 +102,6 @@ void MoneyManager::processTransaction() {
 			}
 		}
 	}
+
+	cout << "\033[1;31mERROR MODULE TERMINATED\033[0m" << endl;
 }

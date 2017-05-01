@@ -57,14 +57,14 @@ void SupplyTracker::processMakerRequest() {
 			storedMeal.numDrinks -= amount;
 			this->toDrinkMaker->write(amount);
 		}
-		else if (this->fromBurgerMaker->checkValid()) {
+		if (this->fromBurgerMaker->checkValid()) {
 			DEBUG_MSG("Burger Request");
             int amount;
             this->fromBurgerMaker->read(amount);
 			storedMeal.numBurgers -= amount;
             this->toBurgerMaker->write(amount);
 		}
-		else if (this->fromFryMaker->checkValid()) {
+		if (this->fromFryMaker->checkValid()) {
 			DEBUG_MSG("Fry Request");
             int amount;
             this->fromFryMaker->read(amount);

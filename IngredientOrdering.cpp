@@ -1,4 +1,5 @@
 #include <systemc.h>
+#include <iomanip>
 #include "double_handshake.h"
 #include "IngredientOrdering.h"
 
@@ -30,7 +31,7 @@ void IngredientOrdering::main() {
 			" Fries, " << requestedMeal.numDrinks <<
 			" Drinks");
 
-		DEBUG_MSG("Total cost: " << requestedMoney.amt << endl);
+		DEBUG_MSG("Total cost: $" << fixed << setprecision(2) << requestedMoney.amt / 100.0 << endl);
 
 		// Try to withdraw that much from the money manager to spend
 		// on the order

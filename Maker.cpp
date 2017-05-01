@@ -28,12 +28,10 @@ void Maker::processCombinerRequest() {
 
 		// Step 3 Wait for Supply Tracker to respond with a number of ingredients
 		int numSuppliedTotal;
-		wait(this->fromSupplyTracker->data_ready_event());
 		this->fromSupplyTracker->read(numSuppliedTotal);
 		while(numSuppliedTotal < numRequested) // if the Supply Tracker couldn't afford enough ingredients then continue waiting until it can
 		{
 			this->toSupplyTracker->write(numRequested - numSuppliedTotal);
-			wait(this->fromSupplyTracker->data_ready_event());
 			int numToAdd;
 			this->fromSupplyTracker->read(numToAdd);
 			numSuppliedTotal += numToAdd;
@@ -46,6 +44,7 @@ void Maker::processCombinerRequest() {
 		//         I know it makes sense but are we actually implementing the wait/sleep
 		int numFoodCreated = 0;
 		while(numFoodCreated < numRequested) {
+			numFoodCreated++;
 			// delay/wait/sleep would go here
 			this->toMealCombiner->post(); // food created (increment semaphore)
 		}

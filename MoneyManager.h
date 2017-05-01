@@ -7,7 +7,7 @@
 
 class MoneyManager : public sc_module {
 	private:
-		double money;
+		int money;
 
 	public:
 		// Inputs

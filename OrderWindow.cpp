@@ -1,4 +1,5 @@
 #include <systemc.h>
+#include <iomanip>
 #include "OrderWindow.h"
 #include "double_handshake.h"
 #include "burger_buddy.h"
@@ -24,24 +25,25 @@ void OrderWindow::main()
 				continue;
 			}
 
-			cout<<"enter the payment amount"<<endl;
+			cout<<"Please enter payment of $" << fixed << setprecision(2) << requestedMeal.getPrice() / 100.0 << " or more: ";
 			cin >> inputMoney.amt;
 			while (inputMoney.amt < requestedMeal.getPrice())
 			{
 					cout << "Insufficient money entered. "<<endl;
-					cout << "Enter equal or more than "<< requestedMeal.getPrice() << " amount" << endl;
+					cout << "Enter equal or more than $"<< fixed << setprecision(2) << requestedMeal.getPrice() / 100.0 << " amount" << endl;
 					cin >> inputMoney.amt;
 			}
 			inputMoney.type = DEPOSIT;
 			toMoneyManager -> write (inputMoney);
-			changeMoney.amt = requestedMeal.getPrice();
+			changeMoney.amt = inputMoney.amt - requestedMeal.getPrice();
 			changeMoney.type = WITHDRAW;
 			toMoneyManager -> write (changeMoney);
 			fromMoneyManager -> read (outputMoney);
-			if (outputMoney.amt != 0 && outputMoney.type == WITHDRAW)
-				cout<<"the remaining balance returned is"<<outputMoney.amt<<endl;
+			if (outputMoney.amt != 0) {
+				cout<<"the remaining balance returned is $" << fixed << setprecision(2) << outputMoney.amt  / 100.0 << endl;
+			}
 			
-			DEBUG_MSG("sending request to meal combiner"<<"with order number"<<requestedMeal.orderNumber);
+			DEBUG_MSG("sending request to meal combiner with order number " << requestedMeal.orderNumber);
 			toMealCombiner -> write(requestedMeal);
 		}
 }
