@@ -50,13 +50,6 @@ void SupplyTracker::processMakerRequest() {
  	while (true) {
 		// Wait on multiple events
 		wait(this->fromDrinkMaker->data_ready_event() | this->fromBurgerMaker->data_ready_event() | this->fromFryMaker->data_ready_event());
-		if (this->fromDrinkMaker->checkValid()) {
-			DEBUG_MSG("Drink Request");
-			int amount;
-			this->fromDrinkMaker->read(amount);
-			storedMeal.numDrinks -= amount;
-			this->toDrinkMaker->write(amount);
-		}
 		if (this->fromBurgerMaker->checkValid()) {
 			DEBUG_MSG("Burger Request");
             int amount;
@@ -70,6 +63,13 @@ void SupplyTracker::processMakerRequest() {
             this->fromFryMaker->read(amount);
             storedMeal.numFries -= amount;
             this->toFryMaker->write(amount);
+		}
+		if (this->fromDrinkMaker->checkValid()) {
+			DEBUG_MSG("Drink Request");
+			int amount;
+			this->fromDrinkMaker->read(amount);
+			storedMeal.numDrinks -= amount;
+			this->toDrinkMaker->write(amount);
 		}
  	}
 }

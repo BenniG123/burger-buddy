@@ -14,13 +14,13 @@ void MealCombiner::processMeals() {
 		
 		// Step 2 send components of the order to the respective makers
 		this->toBurgerMaker->write(m.numBurgers);
-		//this->toFryMaker->write(m.numFries);
-		//this->toDrinkMaker->write(m.numDrinks);
+		this->toFryMaker->write(m.numFries);
+		this->toDrinkMaker->write(m.numDrinks);
 
 		// Step 3 attempt to pull number of ingredients off of the queues (semaphores)
 		int burgerCount = 0, fryCount = 0, drinkCount = 0;
-		while((burgerCount < m.numBurgers) &&
-				(fryCount < m.numFries) &&
+		while((burgerCount < m.numBurgers) ||
+				(fryCount < m.numFries) ||
 				(drinkCount < m.numDrinks)) {
 
 			if(burgerCount < m.numBurgers) {
@@ -29,12 +29,12 @@ void MealCombiner::processMeals() {
 			}
 
 			if(fryCount < m.numFries) {
-				//this->fromFryMaker->wait(); // wait for fry maker to make fries
+				this->fromFryMaker->wait(); // wait for fry maker to make fries
 				fryCount++;
 			}
 
 			if(drinkCount < m.numDrinks) {
-				//this->fromDrinkMaker->wait(); // wait for drink maker to make a drink
+				this->fromDrinkMaker->wait(); // wait for drink maker to make a drink
 				drinkCount++;
 			}
 
